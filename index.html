@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stop on Document Complete Harness</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Stop on Document Complete Harness</h1>
+      <p class="hint">
+        Static GitHub Pages version for validating post-document-complete
+        behavior in web monitors.
+      </p>
+
+      <section class="card">
+        <h2>Recommended Flow</h2>
+        <p>
+          Run each URL twice in the same monitor type: once with
+          <code>Stop Test On Document Complete</code> disabled and once with it
+          enabled.
+        </p>
+        <p>
+          Compare waterfall entries after Document Complete and total duration.
+        </p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2><a href="./baseline.html">Baseline</a></h2>
+          <p>No network activity after load.</p>
+          <span class="pill">Expected: same with on/off</span>
+        </article>
+
+        <article class="card">
+          <h2><a href="./late-fetch.html">Late Fetch</a></h2>
+          <p>One delayed fetch starts 500 ms after <code>window.load</code>.</p>
+          <span class="pill">Expected: visible when off</span>
+          <span class="pill">Expected: mostly absent when on</span>
+        </article>
+
+        <article class="card">
+          <h2><a href="./burst-after-load.html">Burst After Load</a></h2>
+          <p>Three delayed fetches start during the legacy pause window.</p>
+          <span class="pill">Expected: several late requests when off</span>
+          <span class="pill">Expected: minimal late requests when on</span>
+        </article>
+
+        <article class="card">
+          <h2><a href="./long-request-static.html">Long Request</a></h2>
+          <p>
+            A delayed fetch starts after load and downloads a larger payload to
+            keep the request visible longer.
+          </p>
+          <span class="pill">Expected: more visible when off</span>
+          <span class="pill">Expected: reduced when on</span>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
