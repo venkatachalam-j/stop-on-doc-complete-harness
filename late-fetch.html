@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Late Fetch</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./common.js" defer></script>
+    <script defer>
+      harness.bindLifecycleLogs();
+      harness.writeLine("Late-fetch scenario initialized");
+
+      window.addEventListener("load", function () {
+        harness.writeLine("Scheduling one small payload fetch for 500 ms after load");
+
+        setTimeout(function () {
+          const url = harness.cacheBusted("./payload-small.txt", "late-fetch");
+          harness.timedFetch("late-fetch", url);
+        }, 500);
+      });
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>Late Fetch</h1>
+      <p class="hint">
+        One fetch starts 500 ms after <code>window.load</code>.
+      </p>
+
+      <section class="card">
+        <h2>Expected</h2>
+        <p>
+          With the setting disabled, this request should usually appear after
+          Document Complete. With the setting enabled, it should mostly
+          disappear from the waterfall.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Timeline</h2>
+        <pre id="timeline" class="timeline"></pre>
+      </section>
+    </main>
+  </body>
+</html>
