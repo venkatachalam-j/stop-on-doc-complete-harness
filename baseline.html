@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Baseline</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./common.js" defer></script>
+    <script defer>
+      harness.bindLifecycleLogs();
+      harness.writeLine("Baseline page initialized");
+      harness.writeLine("No requests will be started after load");
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>Baseline</h1>
+      <p class="hint">This page does not start any post-load network activity.</p>
+
+      <section class="card">
+        <h2>Expected</h2>
+        <p>
+          Document Complete and total duration should be very close, regardless
+          of the setting.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Timeline</h2>
+        <pre id="timeline" class="timeline"></pre>
+      </section>
+    </main>
+  </body>
+</html>
